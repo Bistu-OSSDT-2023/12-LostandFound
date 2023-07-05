@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>失物认领平台</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+    #header h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 24px;
+    }
+    #content {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
+    #itemList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .item {
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .item h3 {
+      margin-top: 0;
+    }
+    .item p {
+      margin-bottom: 10px;
+    }
+    .item span {
+      font-weight: bold;
+    }
+    #searchForm {
+      margin-bottom: 20px;
+    }
+    #searchForm input[type="text"] {
+      padding: 5px;
+      width: 200px;
+    }
+    #uploadForm {
+      margin-bottom: 20px;
+    }
+    #uploadForm input[type="text"], 
+    #uploadForm input[type="file"] {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 200px;
+    }
+    #uploadForm input[type="submit"] {
+      padding: 5px 10px;
+    }
+  </style>
+  <script>
+window.addEventListener('beforeunload', function() {
+  // 清空 localStorage 中的数据
+  localStorage.removeItem('items');
+});
+    function saveItem() {
+var itemName = document.getElementById("itemName").value;
+      var itemOwner = document.getElementById("itemOwner").value;
+      var contactInfo = document.getElementById("contactInfo").value;
+      var itemDescription = document.getElementById("itemDescription").value;
+
+      var newItem = {
+        name: itemName,
+        owner: itemOwner,
+        contact: contactInfo,
+        description: itemDescription
+      };
+
+      // 先从localStorage中获取已有的失物信息
+      var items = localStorage.getItem("items");
+      if (items) {
+        // 如果已存在失物信息，则将新失物添加到数组中
+        items = JSON.parse(items);
+        items.push(newItem);
+      } else {
+        // 如果还没有失物信息，则创建一个新的数组并添加新失物
+        items = [newItem];
+      }
+
+      // 将更新后的失物信息保存回localStorage中
+      localStorage.setItem("items", JSON.stringify(items));
+
+      // 清空表单字段
+      document.getElementById("itemName").value = "";
+      document.getElementById("itemOwner").value = "";
+      document.getElementById("contactInfo").value = "";
+      document.getElementById("itemDescription").value = "";
+
+      alert("失物信息已保存！");
+	displayItems();
+    }
+
+    function displayItems() {
+      var items = localStorage.getItem("items");
+      if (items) {
+        items = JSON.parse(items);
+        var itemList = document.getElementById("itemList");
+
+        // 清空失物列表
+        while (itemList.firstChild) {
+          itemList.firstChild.remove();
+        }
+
+        // 遍历失物信息，动态添加到列表中
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+
+          var li = document.createElement("li");
+          li.className = "item";
+
+          var h3 = document.createElement("h3");
+          h3.innerText = item.name;
+          li.appendChild(h3);
+
+          var p1 = document.createElement("p");
+          p1.innerHTML = "<span>姓名：</span>" + item.owner;
+          li.appendChild(p1);
+
+          var p2 = document.createElement("p");
+          p2.innerHTML = "<span>联系方式：</span>" + item.contact;
+          li.appendChild(p2);
+
+          var p3 = document.createElement("p");
+          p3.innerHTML = "<span>描述：</span>" + item.description;
+          li.appendChild(p3);
+
+          itemList.appendChild(li);
+        }
+      }
+    }
+
+    function searchItems() {
+      var searchTerm = document.getElementById("searchTerm").value.toLowerCase();
+      var items = localStorage.getItem("items");
+      if (items) {
+        items = JSON.parse(items);
+        var filteredItems = items.filter(function(item) {
+          // 使用toLowerCase()将搜索词和失物信息转换为小写，以实现不区分大小写的搜索
+          return (
+            item.name.toLowerCase().includes(searchTerm) ||
+            item.owner.toLowerCase().includes(searchTerm) ||
+            item.description.toLowerCase().includes(searchTerm)
+          );
+        });
+
+        var itemList = document.getElementById("itemList");
+
+        // 清空失物列表
+        while (itemList.firstChild) {
+          itemList.firstChild.remove();
+        }
+
+        // 遍历过滤后的失物信息，动态添加到列表中
+        for (var i = 0; i < filteredItems.length; i++) {
+          var item = filteredItems[i];
+
+          var li = document.createElement("li");
+          li.className = "item";
+
+          var h3 = document.createElement("h3");
+          h3.innerText = item.name;
+          li.appendChild(h3);
+
+          var p1 = document.createElement("p");
+          p1.innerHTML = "<span>姓名：</span>" + item.owner;
+          li.appendChild(p1);
+
+          var p2 = document.createElement("p");
+          p2.innerHTML = "<span>联系方式：</span>" + item.contact;
+          li.appendChild(p2);
+
+          var p3 = document.createElement("p");
+          p3.innerHTML = "<span>描述：</span>" + item.description;
+          li.appendChild(p3);
+
+          itemList.appendChild(li);
+        }
+      }
+    }
+  </script>
+</head>
+<body onload="displayItems()">
+  <div id="header">
+    <h1>失物认领平台</h1>
+  </div>
+
+  <div id="content">
+    <h2>失物列表</h2>
+
+    <input type="text" id="searchTerm" placeholder="搜索失物" oninput="searchItems()">
+
+    <ul id="itemList">
+      <!-- 失物列表会通过JavaScript动态添加 -->
+    </ul>
+
+    <form id="uploadForm" onsubmit="saveItem(); return false;">
+      <h2>上传失物信息</h2>
+      <input type="text" id="itemName" placeholder="失物名称" required>
+      <input type="text" id="itemOwner" placeholder="姓名" required>
+      <input type="text" id="contactInfo" placeholder="联系方式" required>
+      <input type="text" id="itemDescription" placeholder="描述" required>
+      <input type="submit" value="上传">
+    </form>
+  </div>
+
+  <div id="footer">
+    &copy; 2023 失物认领平台
+  </div>
+</body>
+</html>
