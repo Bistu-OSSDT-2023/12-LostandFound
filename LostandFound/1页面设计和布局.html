@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>失物认领平台</title>
+  <style>
+      body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+    #header h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 24px;
+    }
+    #content {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
+    #itemList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .item {
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .item h3 {
+      margin-top: 0;
+    }
+    .item p {
+      margin-bottom: 10px;
+    }
+    .item span {
+      font-weight: bold;
+    }
+    #searchForm {
+      margin-bottom: 20px;
+    }
+    #searchForm input[type="text"] {
+      padding: 5px;
+      width: 200px;
+    }
+    #uploadForm {
+      margin-bottom: 20px;
+    }
+    #uploadForm input[type="text"], 
+    #uploadForm input[type="file"] {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 200px;
+    }
+    #uploadForm input[type="submit"] {
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>失物认领平台</h1>
+  </div>
+
+  <div id="content">
+    <h2>失物列表</h2>
+
+    <input type="text" id="searchTerm" placeholder="搜索失物" oninput="searchItems()">
+
+    <ul id="itemList">
+      <!-- 失物列表会通过JavaScript动态添加 -->
+    </ul>
+
+    <form id="uploadForm" onsubmit="saveItem(); return false;">
+      <h2>上传失物信息</h2>
+      <input type="text" id="itemName" placeholder="失物名称" required>
+      <input type="text" id="itemOwner" placeholder="姓名" required>
+      <input type="text" id="contactInfo" placeholder="联系方式" required>
+      <input type="text" id="itemDescription" placeholder="描述" required>
+      <input type="submit" value="上传">
+    </form>
+  </div>
+
+  <div id="footer">
+    &copy; 2023 失物认领平台
+  </div>
+</body>
+</html>
