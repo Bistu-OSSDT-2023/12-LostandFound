@@ -8,4 +8,10 @@ Android与iOS系统的移动设备
 ![示例](https://github.com/Bistu-OSSDT-2023/12-LostandFound/blob/main/picture/3.png)
 ![示例](https://github.com/Bistu-OSSDT-2023/12-LostandFound/blob/main/picture/2.png)
 # LICENSE
-采用[GPL许可证]
+采用[GPL许可证](https://github.com/Bistu-OSSDT-2023/7-easynote/blob/main/LICENSE)
+# CREDITS
+* [李梦飞]
+* [朱浩然]
+* [姚舜禹]
+* [薛 昱]
+* [丁文庆]
