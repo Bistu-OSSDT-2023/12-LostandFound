@@ -12,6 +12,6 @@ Android与iOS系统的移动设备
 # CREDITS
 * [李梦飞](https://github.com/limengfei24)
 * [朱浩然](https://github.com/zhuliuyuan)
-* [姚舜禹](https://github.com/yaoshunyu297)
+* [姚舜禹](https://github.com/yaoshunyu397)
 * [薛 昱](https://github.com/Frankx02)
 * [丁文庆](https://github.com/Dingwenqingpcy)
