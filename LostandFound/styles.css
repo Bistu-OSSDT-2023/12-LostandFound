@@ -1,0 +1,50 @@
+/* styles.css */
+body, h1, h2, ul, li, form, input {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* 页面布局 */
+#header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+#content {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f1f1f1;
+}
+
+#footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+/* 表单样式 */
+form {
+  margin-top: 20px;
+}
+
+input[type="text"], input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
